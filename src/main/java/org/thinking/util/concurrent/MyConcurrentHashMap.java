@@ -16,7 +16,6 @@ import java.util.stream.IntStream;
  * 如果 Key 不存在的话，首次设置值为 1。
  */
 public class MyConcurrentHashMap {
-
     //循环次数
     private static final int LOOP_COUNT = 10000000;
 
