@@ -14,18 +14,21 @@ import java.util.concurrent.*;
 public class ThreadPoolExecutorDemo {
 
     public static void main(String[] args) {
-//        ThreadPoolTaskExecutor executorService = buildThreadPoolTaskExecutor();
-//        executorService.submit(() -> run("execute方法"));
-//        extendedExecutor.execute(() -> run("execute方法"));
-//        Future<?> result=executorService.submit(() -> run("submit方法"));
-//        try {
-//            result.get();
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
+/*        ThreadPoolTaskExecutor executorService = buildThreadPoolTaskExecutor();
+        executorService.submit(() -> run("execute方法"));
+        executorService.execute(() -> run("execute方法"));
+        Future<?> result=executorService.submit(() -> run("submit方法"));
+        executorService.shutdown();
+
+        try {
+            result.get();
+        }catch (Exception e){
+            e.printStackTrace();
+        }*/
 
         //1.创建一个自己定义的线程池,重写afterExecute方法
-/*        ExecutorService service = new ThreadPoolExecutor(1, 1, 0, TimeUnit.MILLISECONDS,new LinkedBlockingQueue(10)){
+        ExecutorService service = new ThreadPoolExecutor(1, 1,
+                0, TimeUnit.MILLISECONDS,new LinkedBlockingQueue(10)){
             @Override
             protected void afterExecute(Runnable r, Throwable t) {
                 super.afterExecute(r, t);
@@ -37,10 +40,10 @@ public class ThreadPoolExecutorDemo {
         //2.提交任务
         service.execute(()->{
             int i=1/0;
-        });*/
+        });
 
         //创建一个自己定义的线程池,重写afterExecute方法
-        ExecutorService service = new ThreadPoolExecutor(1, 1, 0, TimeUnit.MILLISECONDS, new LinkedBlockingQueue(10)) {
+ /*       ExecutorService service = new ThreadPoolExecutor(1, 1, 0, TimeUnit.MILLISECONDS, new LinkedBlockingQueue(10)) {
             //重写afterExecute方法
             @Override
             protected void afterExecute(Runnable r, Throwable t) {
@@ -61,10 +64,11 @@ public class ThreadPoolExecutorDemo {
             }
         };
 
+        service.execute();
         //2.提交任务
         service.submit(() -> {
             int i = 1 / 0;
-        });
+        });*/
 
         service.shutdown();
     }
@@ -87,7 +91,7 @@ public class ThreadPoolExecutorDemo {
         return executorService;
     }
 
-    /*public static ThreadFactory getMyThreadFactory() {
+    public static ThreadFactory getMyThreadFactory() {
         return new ThreadFactory() {
             @Override
             public Thread newThread(Runnable r) {
@@ -96,7 +100,7 @@ public class ThreadPoolExecutorDemo {
                 return thread;
             }
         };
-    }*/
+    }
 
     /*public static void main(String[] args) {
         //创建一个可缓存线程池，如果线程池长度超过处理需要，可灵活回收空闲线程，若无可回收，则新建线程
@@ -111,7 +115,7 @@ public class ThreadPoolExecutorDemo {
 //        ExecutorService executorService3 = Executors.newWorkStealingPool();
 
         //使用execute方式在每个线程维度捕获异常
-*//*        ExecutorService executorService1 = Executors.newFixedThreadPool(10);
+        *//*ExecutorService executorService1 = Executors.newFixedThreadPool(10);
         int j = 3;
 
         try {
@@ -135,7 +139,7 @@ public class ThreadPoolExecutorDemo {
         }*//*
 
         //使用submit方式在线程池维度捕获异常
-*//*        ExecutorService executorService1 = Executors.newFixedThreadPool(10);
+   *//*     ExecutorService executorService1 = Executors.newFixedThreadPool(10);
         int j = 3;
         for (int i = 0; i < 4; i++) {
             int finalJ = j;
@@ -157,7 +161,7 @@ public class ThreadPoolExecutorDemo {
 
 
         //自定义UncaughtExceptionHandler方式
-        ExecutorService executorService1 = Executors.newFixedThreadPool(10, getMyThreadFactory());
+*//*        ExecutorService executorService1 = Executors.newFixedThreadPool(10, getMyThreadFactory());
         int j = 3;
         for (int i = 0; i < 4; i++) {
             int finalJ = j;
@@ -176,7 +180,7 @@ public class ThreadPoolExecutorDemo {
             j--;
         }
         System.out.println("主线程准备终止线程池");
-        executorService1.shutdown();
+        executorService1.shutdown();*//*
 
     }*/
 }
