@@ -1,4 +1,4 @@
-package org.java.lang.thread;
+package org.thinking.lang.thread;
 
 
 import jodd.util.concurrent.ThreadFactoryBuilder;
